@@ -1,5 +1,4 @@
 ﻿@{ Layout = "layout/Layout.cshtml"; }
-
 <div align="center">
     @foreach (var item in @Model)
     {
@@ -9,88 +8,83 @@
         <a style="width: 105px; margin: 20px 10px 20px 0;" class="@ViewBag.condition" href="@item.Key">@item.Value</a>
     }
 </div>
-    @if (ViewBag.Contains)
-    {
-        <div class="form-group">
-            <form method="POST" action="/@ViewBag.currentId" name="Grades">
-                <div class="form-control" align="center" style="width: 100%; height: auto">
-                    <div align="center">Hur roligt har du haft det?</div>
-                    <br/>
+@if (ViewBag.Contains)
+{
+    <form method="POST" action="/@ViewBag.currentId" name="Grades">
+        <div class="row">
+            <div class="form-group">
+                <p>Hur roligt har du haft det?</p>
+                <div class="col-sm-1">
                     Lägst 
-                        @for (int i = 1; i <= 8; i++)
-                        {
-                            <label class="btn btn-default" id="one" style="width: 70px; margin-right: 5px; height: 40px">
-                                <input type="radio" value="@i" name="First" required="required" /> @i
-                            </label>
-                        }
-                     Högst
-                    </div>
-                <br/>
-
-                <div class="form-control" align="center" style="width: 100%; height: auto">
-                    <div align="center">Hur nöjd är du med egen insats/prestation?</div>
-                    <br/>
-                    Lägst
+                </div>                
+                <div class="btn-group col-sm-10" data-toggle="buttons">
                     @for (int i = 1; i <= 8; i++)
                     {
-                        <label class="btn btn-default" style="width: 70px; margin-right: 5px; height: 40px">
-                            <input type="radio" value="@i" name="Second" required="required" /> @i
+                        <label class="btn btn-default radio-space">
+                            <input type="radio" class="form-control" value="@i" name="First" required="required" /> @i
                         </label>
                     }
+                </div>
+                <div class="col-sm-1">
                     Högst
                 </div>
-                <br/>
-
-                <div class="form-control" align="center" style="width: 100%; height: auto">
-                    <div align="center">Hur nöjd är du med teamets samarbete och förmåga att arbeta tillsammans?</div>
-                    <br/>
-                    Lägst
-                    @for (int i = 1; i <= 8; i++)
-                    {
-                        <label class="btn btn-default" style="width: 70px; margin-right: 5px; height: 40px">
-                            <input type="radio" value="@i" name="Third" required="required" /> @i
-                        </label>
-                    }
-                    Högst
-                </div>
-                <br/>
-
-                <div class="form-control" align="center" style="width: 100%; height: auto">
-                    <div align="center">Hur bra förutsättningar har teamet haft?</div>
-                    <br/>
-                    Lägst
-                    @for (int i = 1; i <= 8; i++)
-                    {
-                        <label class="btn btn-default" style="width: 70px; margin-right: 5px; height: 40px">
-                            <input type="radio" value="@i" name="Fourth" required="required" /> @i
-                        </label>
-                    }
-                    Högst
-                </div>
-                <br/>
-
-                <div class="form-control" align="center" style="width: 100%; height: auto">
-                    <div align="center">Hur hög arbetsro rådde under perioden (avsaknad av störningar)?</div>
-                    <br />
-                    Lägst
-                    @for (int i = 1; i <= 8; i++)
-                    {
-                        <label class="btn btn-default" style="width: 70px; margin-right: 5px; height: 40px">
-                            <input type="radio" value="@i" name="Fifth" required="required" /> @i
-                        </label>
-                    }
-                    Högst
-                </div>
-                <br />
-                <div align="center">
-                    <input class="btn btn-success" type="submit" value="Betygsätt" />
-                </div>
-            </form>
+            </div>
         </div>
-    }
-
-<script>
-    $('label').click(function () {
-        $(this).css("background-color", "#449d44");
-    });
-</script>
+        @*<br />
+            <div class="form-control">
+                <div align="center">Hur nöjd är du med egen insats/prestation?</div>
+                <br />
+                Lägst
+                @for (int i = 1; i <= 8; i++)
+                {
+                    <label class="btn btn-default">
+                        <input type="radio" value="@i" name="Second" required="required" /> @i
+                    </label>
+                }
+                Högst
+            </div>
+            <br />
+            <div class="form-control" align="center">
+                <div align="center">Hur nöjd är du med teamets samarbete och förmåga att arbeta tillsammans?</div>
+                <br />
+                Lägst
+                @for (int i = 1; i <= 8; i++)
+                {
+                    <label class="btn btn-default">
+                        <input type="radio" value="@i" name="Third" required="required" /> @i
+                    </label>
+                }
+                Högst
+            </div>
+            <br />
+            <div class="form-control">
+                <div align="center">Hur bra förutsättningar har teamet haft?</div>
+                <br />
+                Lägst
+                @for (int i = 1; i <= 8; i++)
+                {
+                    <label class="btn btn-default">
+                        <input type="radio" value="@i" name="Fourth" required="required" /> @i
+                    </label>
+                }
+                Högst
+            </div>
+            <br />
+            <div class="form-control">
+                <div align="center">Hur hög arbetsro rådde under perioden (avsaknad av störningar)?</div>
+                <br />
+                Lägst
+                @for (int i = 1; i <= 8; i++)
+                {
+                    <label class="btn btn-default">
+                        <input id="grade-button-@i" type="radio" value="@i" name="Fifth" required="required" /> @i
+                    </label>
+                }
+                Högst
+            </div>
+            <br />*@
+        <div align="center">
+            <input class="btn btn-success" type="submit" value="Betygsätt"/>
+        </div>
+    </form>
+}

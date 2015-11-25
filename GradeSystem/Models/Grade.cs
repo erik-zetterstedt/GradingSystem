@@ -5,7 +5,6 @@ namespace GradeSystem.Models
     public class Grade
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public string QuestionOne { get; set; }
         public int AnswerOne { get; set; }
         public string QuestionTwo { get; set; }
