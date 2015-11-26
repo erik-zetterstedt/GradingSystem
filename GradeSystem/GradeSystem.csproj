@@ -101,7 +101,8 @@
       <DependentUpon>GradesDB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\app.js" />
-    <Content Include="Content\index.html" />
+    <Content Include="Content\borat.jpg" />
+    <Content Include="index.html" />
     <Content Include="Content\styles.css" />
     <Content Include="SqlScripts\setupdb.sql" />
     <Content Include="Web.config">

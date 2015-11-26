@@ -1,5 +1,5 @@
 ﻿.space{
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 input[type=radio] {
@@ -7,15 +7,15 @@ input[type=radio] {
 }
 
 input[type=radio] + label:before {
-    content: "";  
-    display: inline-block;  
-    width: 15px;  
-    height: 15px;  
-    vertical-align:middle;
-    margin-right: 8px;  
-    background-color: #aaa;  
-    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
-    border-radius: 8px;  
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    margin-right: 8px;
+    background-color: #aaa;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, .3);
+    border-radius: 8px;
 }
 
 input[type=radio]:checked + label:before {
@@ -32,6 +32,79 @@ input[type=radio]:checked + label:before {
     box-shadow: inset 0 0px 0px rgba(0,0,0,0);
 }
 
-.input-radio-small{
-    height: 24px;
+#borat {
+    margin-top: 6em;
 }
+
+.fade-enter{
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -moz-animation: fadein 2s; /* Firefox */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera */
+    animation: fadein 2s;
+}
+
+/* FADE IN */
+    
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* FADE OUT */
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Firefox */
+@-moz-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Opera */
+@-o-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+
+
