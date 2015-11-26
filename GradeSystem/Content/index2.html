@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="/Content/styles.css" type="text/css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>Grade System</title>
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+            <div class="row">
+                <h2>
+                    <small>Hello</small>
+                </h2>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="btn-group btn-group-justified">
+                            <div id="example-4">
+                                <label class="btn btn-default">
+                                    <input type="radio" class="form-control" id="bepa" value="apa" v-model="answer" />1
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Answer: {{answer}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function() {
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                answer: ''
+            }
+        });
+    });
+</script>
+</body>
+</html>

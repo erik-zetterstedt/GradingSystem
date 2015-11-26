@@ -1,3 +1,11 @@
-﻿.radio-space {
-    min-width: 12%;
+﻿.space{
+  margin-top: 30px;
 }
+
+.hidden {
+    display: none;
+}
+
+/*input[type=radio]:checked {
+    display: none;
+}*/

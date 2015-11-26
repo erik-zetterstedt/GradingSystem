@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="/Content/styles.css" type="text/css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>Grade System</title>
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <div class="row" v-for="question in questions">
+            <h2 class="apa">
+                <small>{{question.title}}</small>
+            </h2>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <div class="btn-group btn-group-justified">
+                        <label class="btn disabled">
+                            Lägst
+                        </label>
+                        <label class="btn btn-default" v-for="n in 8">
+                            <input type="radio" id="{{n + 1}}" class="form-control" name="{{question.id}}" value="{{n + 1}}" v-model="question.answer" />{{n + 1}}
+                        </label>
+
+                        <label class="btn disabled">
+                            Högst
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="space">
+                <button class="btn btn-success center-block btn-lg" type="submit" v-on:click="sendSubmission" id="send-submission" value="Skicka">Skicka</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+
+        $(document).ready(function () {
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    questions: {},
+                    checkedNames: {}
+                },
+                methods: {
+                    sendSubmission: function () {
+                        console.log(this);
+                        console.log('questions', JSON.stringify(vm.questions));
+                    }
+                }
+            });
+
+            $.getJSON("/questions/", function (json) {
+                vm.questions = json;
+            });
+
+            
+        });
+    </script>
+</body>
+</html>

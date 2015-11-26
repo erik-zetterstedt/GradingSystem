@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Web.UI.WebControls;
-using GradeSystem.DataContext;
 using GradeSystem.Models;
 using Nancy;
 using PetaPoco;
@@ -13,19 +10,19 @@ namespace GradeSystem.Modules
     {
         public StartModule()
         {
-            Get["/"] = _ => View["Start.cshtml", GetKeyValuePairs()];
+            Get["/"] = _ => View["Content/index.html"];
 
-            Get["/{id}"] = _ =>
+            Get["/index2"] = _ => View["Content/index2.html"];
+
+            Get["/questions"] = _ =>
             {
-                ViewBag.currentId = _.id;
-                var currentUser = GetCurrentUser(_.id);
-                ViewBag.Contains = GetKeyValuePairs().Contains(new KeyValuePair<int, string>(currentUser.Key, currentUser.Value));
-
-                return View["Start.cshtml", GetKeyValuePairs()];
+                using (var db = new Database("GradesDB"))
+                {
+                    return Response.AsJson(db.Fetch<Question>("select * from questions").ToList());
+                }
             };
 
-
-            Post["/{id}"] = _ =>
+            Post["/submission"] = _ =>
             {
                 using (var db = new Database("GradesDB"))
                 {
