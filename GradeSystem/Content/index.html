@@ -21,8 +21,8 @@
                     <label class="btn disabled">
                         Lägst
                     </label>
-                    <label class="btn {{grade == question.pickedGrade ? 'btn-success':'btn-default'}}" v-for="grade in question.grades">
-                    <input type="radio" class="form-control btn-noborder input-radio-small" value="{{grade}}" v-model="question.pickedGrade" />{{grade}}
+                    <label class="btn btn-default" v-bind:class="{ 'btn-success': grade == question.pickedGrade }" v-for="grade in question.grades">
+                        <input type="radio" class="form-control btn-noborder input-radio-small" value="{{grade}}" v-model="question.pickedGrade" />{{grade}}
                     </label>
                     <label class="btn disabled">
                         Högst
