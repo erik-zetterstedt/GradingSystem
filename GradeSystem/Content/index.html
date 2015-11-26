@@ -22,7 +22,7 @@
                         Lägst
                     </label>
                     <label class="btn btn-default" v-for="grade in question.grades">
-                        <input type="radio" class="form-control" value="{{grade}}" v-model="question.pickedGrade" required="required" />{{grade}}
+                        <input type="radio" class="form-control btn-noborder input-radio-small" value="{{grade}}" v-model="question.pickedGrade" />{{grade}}
                     </label>
                     <label class="btn disabled">
                         Högst
@@ -54,7 +54,6 @@
             },
             methods: {
                 sendSubmission: function () {
-                    console.log(JSON.stringify(vm.questions));
                     $.ajax({
                         type: "POST",
                         url: "/submission/",
