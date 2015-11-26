@@ -22,12 +22,12 @@
                         Lägst
                     </label>
                     <label class="btn btn-default" v-for="grade in question.grades">
-                        <input type="radio" class="form-control" value="{{grade}}" v-model="question.pickedGrade" required="required"/>{{grade}}
+                        <input type="radio" class="form-control" value="{{grade}}" v-model="question.pickedGrade" required="required" />{{grade}}
                     </label>
                     <label class="btn disabled">
                         Högst
                     </label>
-                </div> 
+                </div>
             </div>
             <div class="row">
                 <div class="space">
@@ -37,33 +37,36 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            var vm = new Vue({
-                el: '#app',
-                data: {
-                    questions: [
-                        {
-                            id: 1,
-                            title: 'Hur kul har du haft?',
-                            grades: [1, 2, 3, 4, 5, 6, 7, 8],
-                            pickedGrade: 0
-                        },
-                        {
-                            id: 2,
-                            title: 'Hur nöjd är du med egen insats/prestation?',
-                            grades: [1, 2, 3, 4, 5, 6, 7, 8],
-                            pickedGrade: 0
-                        }
-                    ]
-                },
-                methods: {
-                    sendSubmission: function () {
-                        console.log(this);
-                        console.log('questions', JSON.stringify(vm.questions));
-                    }
+        var questions = [];
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                questions: []
+            },
+            methods: {
+                sendSubmission: function () {
+                    console.log(this);
+                    console.log('questions', JSON.stringify(vm.questions));
                 }
-            });
+            }
         });
+
+        $.getJSON("/questions/", function (json) {
+            vm.questions = json;
+        });
+        //$(document).ready(function () {                       
+        //    vm.questions = [{
+        //                    id: 1,
+        //                    title: 'Hur kul har du haft?',
+        //                    grades: [1, 2, 3, 4, 5, 6, 7, 8],
+        //                    pickedGrade: 0
+        //                },{
+        //                    id: 2,
+        //                    title: 'Hur nöjd är du med egen insats/prestation?',
+        //                    grades: [1, 2, 3, 4, 5, 6, 7, 8],
+        //                    pickedGrade: 0
+        //                }];
+        //});
     </script>
 </body>
 </html>

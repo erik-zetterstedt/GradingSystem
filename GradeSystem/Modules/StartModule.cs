@@ -16,11 +16,10 @@ namespace GradeSystem.Modules
 
             Get["/questions"] = _ =>
             {
-                return Response.AsJson(new[] { new Question { Id = 1, Title = "Hur roligt har du haft det?" } });
-                //using (var db = new Database("GradesDB"))
-                //{
-                //    return Response.AsJson(db.Fetch<Question>("select * from questions").ToList());
-                //}
+                using (var db = new Database("GradesDB"))
+                {
+                    return Response.AsJson(db.Fetch<Question>("select * from questions").ToList());
+                }
             };
 
             Post["/submission"] = _ =>

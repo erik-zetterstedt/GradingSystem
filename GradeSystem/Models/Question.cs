@@ -4,6 +4,12 @@
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Answer { get; set; }
+        public int[] Grades { get; set; }
+        public int PickedGrade { get; set; }
+
+        public Question()
+        {
+            Grades = new[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        }
     }
 }
