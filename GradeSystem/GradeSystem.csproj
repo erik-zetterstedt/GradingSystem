@@ -103,8 +103,7 @@
     <Content Include="Content\app.js" />
     <Content Include="Content\index.html" />
     <Content Include="Content\styles.css" />
-    <Content Include="SqlScripts\dbo.Grades.sql" />
-    <Content Include="SqlScripts\dbo.Questions.sql" />
+    <Content Include="SqlScripts\setupdb.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
