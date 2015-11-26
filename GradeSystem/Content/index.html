@@ -11,60 +11,48 @@
     <title>Grade System</title>
 </head>
 <body>
-<div class="container">
-    <div id="app">
-        <div class="row" v-for="question in questions">
-            <h2 class="apa">
-                <small>{{question.title}}</small>
-            </h2>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <div class="btn-group btn-group-justified">
-                        <label class="btn disabled">
-                            Lägst
-                        </label>
-                        <label class="btn btn-default" v-for="n in 8">
-                            <input type="radio" id="{{n + 1}}" class="form-control" name="{{question.id}}" value="{{n + 1}}" v-model="question.answer" />{{n + 1}}
-                        </label>
-
-                        <label class="btn disabled">
-                            Högst
-                        </label>
-                    </div>
+    <div class="container">
+        <div id="app">
+            <div class="row" v-for="question in questions">
+                <h2>
+                    <small>{{question.title}}</small>
+                </h2>
+                <div class="btn-group btn-group-justified">
+                    <label class="btn disabled">
+                        Lägst
+                    </label>
+                    <label class="btn btn-default" v-for="grade in question.grades">
+                        <input type="radio" class="form-control" value="{{grade}}" v-model="question.pickedGrade" required="required" />{{grade}}
+                    </label>
+                    <label class="btn disabled">
+                        Högst
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="space">
+                    <button class="btn btn-success center-block btn-lg" type="submit" v-on:click="sendSubmission" value="Skicka">Skicka</button>
                 </div>
             </div>
         </div>
-
-
-        <div class="row">
-            <div class="space">
-                <button class="btn btn-success center-block btn-lg" type="submit" v-on:click="sendSubmission" id="send-submission" value="Skicka">Skicka</button>
-            </div>
-        </div>
     </div>
-</div>
     <script>
-
-        $(document).ready(function () {
-            var vm = new Vue({
-                el: '#app',
-                data: {
-                    questions: {},
-                    checkedNames: {}
-                },
-                methods: {
-                    sendSubmission: function () {
-                        console.log(this);
-                        console.log('questions', JSON.stringify(vm.questions));
-                    }
+        var questions = [];
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                questions: []
+            },
+            methods: {
+                sendSubmission: function () {
+                    console.log(this);
+                    console.log('questions', JSON.stringify(vm.questions));
                 }
-            });
+            }
+        });
 
-            $.getJSON("/questions/", function (json) {
-                vm.questions = json;
-            });
-
-            
+        $.getJSON("/questions/", function (json) {
+            vm.questions = json;
         });
     </script>
 </body>
