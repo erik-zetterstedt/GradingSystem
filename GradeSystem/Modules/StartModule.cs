@@ -1,8 +1,11 @@
-﻿using GradeSystem.Models;
-using Nancy;
-using PetaPoco;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using GradeSystem.Models;
+using Nancy;
+using Nancy.ModelBinding;
+using PetaPoco;
 
 namespace GradeSystem.Modules
 {
@@ -11,8 +14,6 @@ namespace GradeSystem.Modules
         public StartModule()
         {
             Get["/"] = _ => View["Content/index.html"];
-
-            Get["/index2"] = _ => View["Content/index2.html"];
 
             Get["/questions"] = _ =>
             {
@@ -24,44 +25,31 @@ namespace GradeSystem.Modules
 
             Post["/submission"] = _ =>
             {
+                var questions = this.Bind<List<Question>>();
+                var date = DateTime.Now;
+
                 using (var db = new Database("GradesDB"))
                 {
-                    db.Save("Grades", "Id", new Grade
+                    foreach (var question in questions)
                     {
-                        QuestionOne = "Hur roligt har du haft det?",
-                        QuestionTwo = "Hur nöjd är du med egen insats/prestation?",
-                        QuestionThree = "Hur nöjd är du med teamets samarbete och förmåga att arbeta tillsammans?",
-                        QuestionFour = "Hur bra förutsättningar har teamet haft?",
-                        QuestionFive = "Hur hög arbetsro rådde under perioden (avsaknad av störningar)?",
-                        AnswerOne = (int)Request.Form["First"],
-                        AnswerTwo = 0,
-                        AnswerThree = 0,
-                        AnswerFour = 0,
-                        AnswerFive = 0
-                    });
+                        db.Save("Grades", "Id", new Grade
+                        {
+                            Questionid = question.Id,
+                            Answer =  question.PickedGrade,
+                            Date = date,
+                            Week = GetWeek(date)
+                        });
+                    }
                 }
-                return View["Start.cshtml", GetKeyValuePairs()];
+
+                return Response.AsJson("Saved", HttpStatusCode.Created);
             };
         }
 
-        public List<KeyValuePair<int, string>> GetKeyValuePairs()
+        private static int GetWeek(DateTime date)
         {
-            return new List<KeyValuePair<int, string>>
-            {
-                new KeyValuePair<int, string>(1, "Milad"),
-                new KeyValuePair<int, string>(2, "William"),
-                new KeyValuePair<int, string>(3, "Erik"),
-                new KeyValuePair<int, string>(4, "Richard"),
-                new KeyValuePair<int, string>(5, "Kristoffer"),
-                new KeyValuePair<int, string>(6, "Torbjörn"),
-                new KeyValuePair<int, string>(7, "Hans-Göran"),
-                new KeyValuePair<int, string>(8, "Hugo")
-            }.OrderBy(x => x.Value).ToList();
-        }
-
-        public KeyValuePair<int, string> GetCurrentUser(int id)
-        {
-            return GetKeyValuePairs().FirstOrDefault(x => x.Key == id);
+            var day = (int)CultureInfo.CurrentCulture.Calendar.GetDayOfWeek(date);
+            return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(date.AddDays(4 - (day == 0 ? 7 : day)), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
     }
 }

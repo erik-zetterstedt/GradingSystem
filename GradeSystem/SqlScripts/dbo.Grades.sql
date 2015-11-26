@@ -51,6 +51,29 @@ SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 GO
 BEGIN TRANSACTION
 GO
+PRINT N'Dropping [dbo].[FK_Grades_Questions]...';
+
+
+GO
+ALTER TABLE [dbo].[Grades] DROP CONSTRAINT [FK_Grades_Questions];
+
+
+GO
+IF @@ERROR <> 0
+   AND @@TRANCOUNT > 0
+    BEGIN
+        ROLLBACK;
+    END
+
+IF @@TRANCOUNT = 0
+    BEGIN
+        INSERT  INTO #tmpErrors (Error)
+        VALUES                 (1);
+        BEGIN TRANSACTION;
+    END
+
+
+GO
 PRINT N'Starting rebuilding table [dbo].[Grades]...';
 
 
@@ -62,17 +85,11 @@ SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 SET XACT_ABORT ON;
 
 CREATE TABLE [dbo].[tmp_ms_xx_Grades] (
-    [Id]            INT            IDENTITY (1, 1) NOT NULL,
-    [QuestionOne]   NVARCHAR (200) NOT NULL,
-    [AnswerOne]     INT            NOT NULL,
-    [QuestionTwo]   NVARCHAR (200) NOT NULL,
-    [AnswerTwo]     INT            NOT NULL,
-    [QuestionThree] NVARCHAR (200) NOT NULL,
-    [AnswerThree]   INT            NOT NULL,
-    [QuestionFour]  NVARCHAR (200) NOT NULL,
-    [AnswerFour]    INT            NOT NULL,
-    [QuestionFive]  NVARCHAR (200) NOT NULL,
-    [AnswerFive]    INT            NOT NULL,
+    [Id]         INT      IDENTITY (1, 1) NOT NULL,
+    [Date]       DATETIME NOT NULL,
+    [QuestionId] INT      NOT NULL,
+    [Answer]     INT      NOT NULL,
+    [Week]       INT      NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -80,18 +97,12 @@ IF EXISTS (SELECT TOP 1 1
            FROM   [dbo].[Grades])
     BEGIN
         SET IDENTITY_INSERT [dbo].[tmp_ms_xx_Grades] ON;
-        INSERT INTO [dbo].[tmp_ms_xx_Grades] ([Id], [QuestionOne], [AnswerOne], [QuestionTwo], [AnswerTwo], [QuestionThree], [AnswerThree], [QuestionFour], [AnswerFour], [QuestionFive], [AnswerFive])
+        INSERT INTO [dbo].[tmp_ms_xx_Grades] ([Id], [Date], [QuestionId], [Answer], [Week])
         SELECT   [Id],
-                 [QuestionOne],
-                 [AnswerOne],
-                 [QuestionTwo],
-                 [AnswerTwo],
-                 [QuestionThree],
-                 [AnswerThree],
-                 [QuestionFour],
-                 [AnswerFour],
-                 [QuestionFive],
-                 [AnswerFive]
+                 [Date],
+                 [QuestionId],
+                 [Answer],
+                 [Week]
         FROM     [dbo].[Grades]
         ORDER BY [Id] ASC;
         SET IDENTITY_INSERT [dbo].[tmp_ms_xx_Grades] OFF;
@@ -122,6 +133,30 @@ IF @@TRANCOUNT = 0
 
 
 GO
+PRINT N'Creating [dbo].[FK_Grades_Questions]...';
+
+
+GO
+ALTER TABLE [dbo].[Grades] WITH NOCHECK
+    ADD CONSTRAINT [FK_Grades_Questions] FOREIGN KEY ([QuestionId]) REFERENCES [dbo].[Questions] ([Id]);
+
+
+GO
+IF @@ERROR <> 0
+   AND @@TRANCOUNT > 0
+    BEGIN
+        ROLLBACK;
+    END
+
+IF @@TRANCOUNT = 0
+    BEGIN
+        INSERT  INTO #tmpErrors (Error)
+        VALUES                 (1);
+        BEGIN TRANSACTION;
+    END
+
+
+GO
 
 IF EXISTS (SELECT * FROM #tmpErrors) ROLLBACK TRANSACTION
 GO
@@ -132,6 +167,18 @@ END
 ELSE PRINT N'The transacted portion of the database update failed.'
 GO
 DROP TABLE #tmpErrors
+GO
+PRINT N'Checking existing data against newly created constraints';
+
+
+GO
+USE [$(DatabaseName)];
+
+
+GO
+ALTER TABLE [dbo].[Grades] WITH CHECK CHECK CONSTRAINT [FK_Grades_Questions];
+
+
 GO
 PRINT N'Update complete.';
 
