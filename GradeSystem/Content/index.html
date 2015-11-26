@@ -31,22 +31,40 @@
             </div>
             <div class="row">
                 <div class="space">
-                    <button class="btn btn-success center-block btn-lg" type="submit" v-on:click="sendSubmission" value="Skicka">Skicka</button>
+                    <button v-bind:disabled="computeDisabled" class=" btn btn-success center-block btn-lg" type="submit" v-on:click="sendSubmission" value="Skicka">Skicka</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        var questions = [];
         var vm = new Vue({
             el: '#app',
             data: {
                 questions: []
             },
+            computed: {
+                computeDisabled: function () {
+                    for (var i = 0; i < this.questions.length; i++) {
+                        if (this.questions[i].pickedGrade === 0) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            },
             methods: {
                 sendSubmission: function () {
-                    console.log(this);
-                    console.log('questions', JSON.stringify(vm.questions));
+                    console.log(JSON.stringify(vm.questions));
+                    $.ajax({
+                        type: "POST",
+                        url: "/submission/",
+                        contentType: "application/json",
+                        data: JSON.stringify(vm.questions),
+                        success: function (returnedData) {
+                            alert("Saved!! Got this back: " + returnedData);
+                        },
+                        dataType: "json"
+                    });
                 }
             }
         });
@@ -54,6 +72,8 @@
         $.getJSON("/questions/", function (json) {
             vm.questions = json;
         });
+
+
     </script>
 </body>
 </html>

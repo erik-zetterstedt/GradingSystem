@@ -25,7 +25,7 @@ namespace GradeSystem.Modules
 
             Post["/submission"] = _ =>
             {
-                var questions = this.Bind<List<Question>>();
+                var questions = this.Bind<Question[]>();
                 var date = DateTime.Now;
 
                 using (var db = new Database("GradesDB"))
