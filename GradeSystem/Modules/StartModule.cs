@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GradeSystem.Models;
+﻿using GradeSystem.Models;
 using Nancy;
 using PetaPoco;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GradeSystem.Modules
 {
@@ -16,10 +16,11 @@ namespace GradeSystem.Modules
 
             Get["/questions"] = _ =>
             {
-                using (var db = new Database("GradesDB"))
-                {
-                    return Response.AsJson(db.Fetch<Question>("select * from questions").ToList());
-                }
+                return Response.AsJson(new[] { new Question { Id = 1, Title = "Hur roligt har du haft det?" } });
+                //using (var db = new Database("GradesDB"))
+                //{
+                //    return Response.AsJson(db.Fetch<Question>("select * from questions").ToList());
+                //}
             };
 
             Post["/submission"] = _ =>
@@ -56,8 +57,8 @@ namespace GradeSystem.Modules
                 new KeyValuePair<int, string>(6, "Torbjörn"),
                 new KeyValuePair<int, string>(7, "Hans-Göran"),
                 new KeyValuePair<int, string>(8, "Hugo")
-            }.OrderBy(x=>x.Value).ToList();
-        } 
+            }.OrderBy(x => x.Value).ToList();
+        }
 
         public KeyValuePair<int, string> GetCurrentUser(int id)
         {
