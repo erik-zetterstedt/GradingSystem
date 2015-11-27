@@ -79,8 +79,11 @@
         });
 
         function getQuestions() {
-            $.getJSON("/questions/", function(json) {
+            $.getJSON("/questions/", function (json) {
                 vm.questions = json;
+                $.each(vm.questions, function(index, question) {
+                    question.team = window.location.pathname.substr(1);
+                });
             });
         }
 

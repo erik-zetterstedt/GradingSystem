@@ -10,6 +10,7 @@ CREATE TABLE [dbo].[Grades] (
 	[QuestionId] INT      NOT NULL,
 	[Answer]     INT      NOT NULL,
 	[Week]       INT      NOT NULL,
+	[Team]       NVARCHAR (200) NOT NULL,
 	PRIMARY KEY CLUSTERED ([Id] ASC),
 
 	CONSTRAINT [FK_Grades_Questions] FOREIGN KEY ([QuestionId]) REFERENCES [dbo].[Questions] ([Id])

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="/Content/styles.css" type="text/css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>GradeIt - Choose your team</title>
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+            <div class="jumbotron">
+                <h3 class="center">Choose your team</h3>
+                <div class="row" v-for="team in teams">
+                    <div class="btn-group">
+                        <a href="/{{team}}">
+                            <label class="btn btn-default">
+                                {{team}}
+                            </label>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                teams: []
+            }
+        });
+
+        function getTeams() {
+            $.getJSON("/teams/", function(json) {
+                vm.teams = json;
+            });
+        }
+
+        getTeams();
+    </script>
+</body>
+</html>

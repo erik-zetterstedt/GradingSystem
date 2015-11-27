@@ -9,5 +9,6 @@ namespace GradeSystem.Models
         public int Questionid { get; set; }
         public int Answer { get; set; }
         public int Week { get; set; }
+        public string Team { get; set; }
     }
 }

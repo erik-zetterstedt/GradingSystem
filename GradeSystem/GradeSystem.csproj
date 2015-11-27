@@ -73,13 +73,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\GradesDB.mdf" />
-    <Content Include="App_Data\GradesDB_log.ldf">
-      <DependentUpon>GradesDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\app.js" />
     <Content Include="Content\borat.jpg" />
-    <Content Include="Content\index.html" />
+    <Content Include="Content\teams.html" />
+    <Content Include="Content\questions.html" />
     <Content Include="Content\styles.css" />
     <None Include="SqlScripts\setupdb.sql" />
     <Content Include="Web.config">
@@ -120,6 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -13,7 +13,9 @@ namespace GradeSystem.Modules
     {
         public StartModule()
         {
-            Get["/"] = _ => View["Content/index.html"];
+            Get["/"] = _ => View["Content/teams.html"];
+
+            Get["/{team}"] = _ => View["Content/questions.html"];
 
             Get["/questions"] = _ =>
             {
@@ -21,6 +23,12 @@ namespace GradeSystem.Modules
                 {
                     return Response.AsJson(db.Fetch<Question>("select * from questions").ToList());
                 }
+            };
+
+            Get["/teams"] = _ =>
+            {
+                var teams = new List<string> {"Rocky", "Smaug"};
+                return Response.AsJson(teams);
             };
 
             Post["/submission"] = _ =>
@@ -37,7 +45,8 @@ namespace GradeSystem.Modules
                             Questionid = question.Id,
                             Answer =  question.PickedGrade,
                             Date = date,
-                            Week = GetWeek(date)
+                            Week = GetWeek(date),
+                            Team = question.Team
                         });
                     }
                 }

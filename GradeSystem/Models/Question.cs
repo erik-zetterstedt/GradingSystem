@@ -6,6 +6,7 @@
         public string Title { get; set; }
         public int[] Grades { get; set; }
         public int PickedGrade { get; set; }
+        public string Team { get; set; }
 
         public Question()
         {
