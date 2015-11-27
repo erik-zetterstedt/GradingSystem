@@ -81,7 +81,7 @@
     <Content Include="Content\borat.jpg" />
     <Content Include="Content\index.html" />
     <Content Include="Content\styles.css" />
-    <Content Include="SqlScripts\setupdb.sql" />
+    <None Include="SqlScripts\setupdb.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
