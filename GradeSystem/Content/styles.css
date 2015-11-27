@@ -44,6 +44,14 @@ input[type=radio]:checked + label:before {
     animation: fadein 2s;
 }
 
+.team-button {
+    margin-top: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    font-size: 2em;
+}
+
+
 /* FADE IN */
     
 @keyframes fadein {

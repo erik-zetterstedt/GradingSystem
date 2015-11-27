@@ -8,21 +8,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
-    <title>GradeIt - Choose your team</title>
+    <title>GradeIt - Select your team</title>
 </head>
 <body>
     <div class="container">
         <div id="app">
-            <div class="jumbotron">
-                <h3 class="center">Choose your team</h3>
-                <div class="row" v-for="team in teams">
-                    <div class="btn-group">
-                        <a href="/{{team}}">
-                            <label class="btn btn-default">
-                                {{team}}
-                            </label>
-                        </a>
-                    </div>
+            <div class="jumbotron text-center">
+                <h1>Select your team</h1>
+                <div class="row">
+                    <a v-for="team in teams" href="/{{team}}" class="btn btn-info btn-lg team-button" role="button">{{team}}</a>
                 </div>
             </div>
         </div>
@@ -36,7 +30,7 @@
         });
 
         function getTeams() {
-            $.getJSON("/teams/", function(json) {
+            $.getJSON("/teams/", function (json) {
                 vm.teams = json;
             });
         }
