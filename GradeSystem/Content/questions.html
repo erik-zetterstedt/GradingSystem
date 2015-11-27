@@ -7,6 +7,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta charset="UTF-8" />
     <title>GradeIt - Weekly status report</title>
 </head>
@@ -67,7 +68,7 @@
                         data: JSON.stringify(vm.questions),
                         success: function (returnedData) {
                             vm.isSubmitted = true;
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 vm.isSubmitted = false;
                             }, 2000);
                             getQuestions();
@@ -81,7 +82,7 @@
         function getQuestions() {
             $.getJSON("/questions/", function (json) {
                 vm.questions = json;
-                $.each(vm.questions, function(index, question) {
+                $.each(vm.questions, function (index, question) {
                     question.team = window.location.pathname.substr(1);
                 });
             });
