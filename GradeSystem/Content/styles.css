@@ -51,6 +51,14 @@ input[type=radio]:checked + label:before {
     font-size: 2em;
 }
 
+.chart-body {
+    background-color: #444; 
+    color: #222
+}
+
+#chart {
+    background-color: #333;
+}
 
 /* FADE IN */
     

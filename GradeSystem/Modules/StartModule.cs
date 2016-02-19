@@ -13,9 +13,9 @@ namespace GradeSystem.Modules
     {
         public StartModule()
         {
-            Get["/"] = _ => View["Content/teams.html"];
+            Get["/"] = _ => View["Views/teams.html"];
 
-            Get["/{team}"] = _ => View["Content/questions.html"];
+            Get["/{team}"] = _ => View["Views/questions.html"];
 
             Get["/questions"] = _ =>
             {

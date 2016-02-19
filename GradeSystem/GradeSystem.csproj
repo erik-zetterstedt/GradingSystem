@@ -75,16 +75,25 @@
   <ItemGroup>
     <Content Include="Content\app.js" />
     <Content Include="Content\borat.jpg" />
-    <Content Include="Content\teams.html" />
-    <Content Include="Content\questions.html" />
+    <Content Include="Views\charts.html" />
+    <Content Include="Views\teams.html" />
+    <Content Include="Views\questions.html" />
     <Content Include="Content\styles.css" />
     <None Include="SqlScripts\setupdb.sql" />
+    <Content Include="Content\Chart.js" />
+    <Content Include="Content\Chart.min.js" />
+    <Content Include="Content\lodash.core.min.js" />
+    <Content Include="Content\lodash.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Chart.cs" />
+    <Compile Include="Models\ChartsData.cs" />
+    <Compile Include="Models\ChartViewModel.cs" />
+    <Compile Include="Models\Dataset.cs" />
     <Compile Include="Models\Generated\Database.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,6 +102,7 @@
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\PetaPoco.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Modules\ChartModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\StartModule.cs" />
   </ItemGroup>
@@ -118,9 +128,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
