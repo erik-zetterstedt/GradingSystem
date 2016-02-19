@@ -52,9 +52,22 @@ input[type=radio]:checked + label:before {
 }
 
 .chart-body {
-    background-color: #444; 
-    color: #222
+    background-color: #444;
+    color: #222;
+    font-family: 'Share Tech Mono';
 }
+
+.chart-body h1 {
+}
+
+.chart-body ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .chart-body ul li span {
+        padding: 2px;
+    }
 
 #chart {
     background-color: #333;
