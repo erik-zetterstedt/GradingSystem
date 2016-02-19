@@ -82,8 +82,6 @@
     <None Include="SqlScripts\setupdb.sql" />
     <Content Include="Content\Chart.js" />
     <Content Include="Content\Chart.min.js" />
-    <Content Include="Content\lodash.core.min.js" />
-    <Content Include="Content\lodash.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
