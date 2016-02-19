@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta charset="UTF-8" />
-    <title>GradeIt - Select your team</title>
+    <title>GradeIt - Charts for Team @Model.Team</title>
     
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="/Content/styles.css" type="text/css" rel="stylesheet" />
@@ -14,14 +14,13 @@
 </head>
 <body class="chart-body">
     <div class="container">
-        <h1>Grade It - Team @Model.Team</h1>
         <div id="legend"></div>
         <canvas id="chart" width="800" height="280"></canvas>
     </div>
     <script>
         var options = {
             animation: true,
-            animationSteps: 60,
+            animationSteps: 300,
             animationEasing: "easeOutQuart",
             showScale: true,
             scaleOverride: false,
