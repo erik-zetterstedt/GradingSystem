@@ -21,5 +21,7 @@ namespace GradeSystem.Models
         public string PointHighlightStroke { get; set; }
 
         public IEnumerable<double> Data { get; set; }
+
+        public IEnumerable<int> NumberOfAnswers { get; set; }
     }
 }

@@ -24,11 +24,11 @@ namespace GradeSystem.Modules
 
                     chart.Labels = chartsData
                         .GroupBy(c => new { c.Date.Year, c.Week })
-                        .Select(c => string.Format("{0} v {1}", c.Key.Year, c.Key.Week));
+                        .Select(c => string.Format("{0} v {1} - {2} svar - medel {3}", c.Key.Year, c.Key.Week, (c.Count() / 5), Math.Round(c.Select(d => d.Answer).Average(), 2)));
 
                     chart.Datasets = chartsData
                         .GroupBy(x => new { x.Title, x.Questionid })
-                        .Select(y => new Dataset()
+                        .Select(y => new Dataset
                         {
                             Label = y.Key.Title,
                             QuestionId = y.Key.Questionid,
@@ -39,9 +39,11 @@ namespace GradeSystem.Modules
                             PointStrokeColor = "#fff",
                             PointHighlightFill = "#fff",
                             PointHighlightStroke = GetColor(y.Key.Questionid),
-
+                            NumberOfAnswers = y.GroupBy(x => new { x.Date.Year, x.Week }).Select(x => x.Count())
                         }).OrderBy(x => x.QuestionId);                 
                 }
+                
+                chart.Magi();
 
                 return View["Views/charts.html",
                         new ChartViewModel
