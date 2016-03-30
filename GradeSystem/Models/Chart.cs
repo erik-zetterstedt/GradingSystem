@@ -14,6 +14,8 @@ namespace GradeSystem.Models
             Labels = Labels.Reverse().Take(9).Reverse();
             Labels = new[] { "Avg last 10 weeks" }.Concat(Labels);
 
+            var newDataSets = new List<Dataset>();
+
             foreach (var dataset in Datasets)
             {
                 var avg = dataset
@@ -23,8 +25,11 @@ namespace GradeSystem.Models
                     .Take(10)
                     .Average();
 
-                dataset.Data = new[]{ avg}.Concat(dataset.Data.Reverse().Take(9).Reverse());
+                dataset.Data = new[] { avg }.Concat(dataset.Data.Reverse().Take(9).Reverse());
+                newDataSets.Add(dataset);
             }
+
+            Datasets = newDataSets;
         }
     }
 }
