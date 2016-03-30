@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GradeSystem.Models
@@ -25,7 +26,7 @@ namespace GradeSystem.Models
                     .Take(10)
                     .Average();
 
-                dataset.Data = new[] { avg }.Concat(dataset.Data.Reverse().Take(9).Reverse());
+                dataset.Data = new[] { Math.Round(avg, 1) }.Concat(dataset.Data.Reverse().Take(9).Reverse());
                 newDataSets.Add(dataset);
             }
 
