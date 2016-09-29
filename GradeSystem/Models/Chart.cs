@@ -19,12 +19,17 @@ namespace GradeSystem.Models
 
             foreach (var dataset in Datasets)
             {
-                var avg = dataset
-                    .Data
-                    .Reverse()
-                    .Skip(9)
-                    .Take(10)
-                    .Average();
+                double avg = 0;
+
+                if (dataset.Data.Count() > 9)
+                {
+                    avg = dataset
+                        .Data
+                        .Reverse()
+                        .Skip(9)
+                        .Take(10)
+                        .Average();
+                }
 
                 dataset.Data = new[] { Math.Round(avg, 1) }.Concat(dataset.Data.Reverse().Take(9).Reverse());
                 newDataSets.Add(dataset);
