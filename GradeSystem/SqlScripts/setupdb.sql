@@ -21,3 +21,4 @@ insert into [dbo].Questions (Title) values('Hur nöjd är du med egen insats/pre
 insert into [dbo].Questions (Title) values('Hur nöjd är du med teamets samarbete och förmåga att arbeta tillsammans?');
 insert into [dbo].Questions (Title) values('Hur bra förutsättningar har teamet haft?');
 insert into [dbo].Questions (Title) values('Hur hög arbetsro rådde under perioden (avsaknad av störningar)?');
+insert into [dbo].Questions (Title) values('Fokuserar vi på rätt saker?');
