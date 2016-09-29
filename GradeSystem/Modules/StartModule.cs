@@ -27,7 +27,7 @@ namespace GradeSystem.Modules
 
             Get["/teams"] = _ =>
             {
-                var teams = new List<string> {"Rocky", "Smaug"};
+                var teams = new List<string> {"Content", "Payment", "CMS", "Search", "Booking", "Customer"};
                 return Response.AsJson(teams);
             };
 
