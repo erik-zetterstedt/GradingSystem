@@ -20,7 +20,7 @@ namespace GradeSystem.Modules
 
                 using (var db = new Database("GradesDB"))
                 {
-                    var chartsData = db.Fetch<ChartsData>("select g.*, q.Title from grades g join Questions q on g.QuestionId = q.Id where Team = @0", team).ToList();
+                    var chartsData = db.Fetch<ChartsData>("select g.*, q.Title from grades g join Questions q on g.QuestionId = q.Id where Team = @0 or @0 = 'All'", team).ToList();
 
                     chart.Labels = chartsData
                         .GroupBy(c => new { c.Date.Year, c.Week })
